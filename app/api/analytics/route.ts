@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { computeDuration, type VapiCall } from "@/lib/vapi-api";
 import { supabase, type Ticket } from "@/lib/supabase";
+import axios from "axios";
 
 const COMPLETED_REASONS = new Set([
 	"customer-ended-call",
@@ -8,16 +9,16 @@ const COMPLETED_REASONS = new Set([
 ]);
 
 export async function GET() {
-	const [vapiData, { data: tickets }] = await Promise.all([
-		fetch(
+	const [{ data: vapiData }, { data: tickets }] = await Promise.all([
+		axios.get(
 			`https://api.vapi.ai/call?assistantId=${process.env.NEXT_PUBLIC_VAPI_ASSISTANT_ID}&limit=1000`,
 			{
 				headers: {
 					Authorization: `Bearer ${process.env.NEXT_PUBLIC_VAPI_PRIVATE_KEY}`,
+					"Content-Type": "application/json",
 				},
-				next: { revalidate: 60 },
 			},
-		).then((r) => r.json()),
+		),
 		supabase.from("tickets").select("*"),
 	]);
 
@@ -51,7 +52,9 @@ export async function GET() {
 			: 0;
 
 	const openTickets = safeTickets.filter((t) => t.status === "Open").length;
-	const resolvedTickets = safeTickets.filter((t) => t.status === "Closed").length;
+	const resolvedTickets = safeTickets.filter(
+		(t) => t.status === "Closed",
+	).length;
 	const totalTickets = safeTickets.length;
 
 	return NextResponse.json({
