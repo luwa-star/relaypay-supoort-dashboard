@@ -8,6 +8,7 @@ import {
 	Phone,
 	Ticket,
 	BarChart3,
+	BookOpen,
 	LogOut,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -92,8 +93,16 @@ export function Sidebar() {
 					</ul>
 				</nav>
 
-				{/* Logout */}
-				<div className="border-t border-sidebar-border p-3">
+				{/* Bottom links */}
+				<div className="border-t border-sidebar-border p-3 space-y-0.5">
+					<a
+						href="https://road-tilapia-700.notion.site/RelayPay-Knowledge-Base-33ca8ad4796a8015af4afd878c269558"
+						target="_blank"
+						rel="noopener noreferrer"
+						className="flex w-full items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-sidebar-foreground/70 hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground transition-colors">
+						<BookOpen className="h-4 w-4 shrink-0" />
+						Knowledge Base
+					</a>
 					<button
 						onClick={() => setShowLogoutDialog(true)}
 						className="flex w-full items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-sidebar-foreground/70 hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground transition-colors">
@@ -101,6 +110,7 @@ export function Sidebar() {
 						Sign out
 					</button>
 				</div>
+
 			</aside>
 
 			<Dialog open={showLogoutDialog} onOpenChange={setShowLogoutDialog}>
