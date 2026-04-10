@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run:*)",
+      "Bash(ls -la /Users/a1/relaypay-support-dashboard/.env*)"
+    ]
+  }
+}
