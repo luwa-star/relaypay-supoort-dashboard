@@ -39,6 +39,16 @@ export type TicketCategory =
 	| "technical"
 	| "other";
 
+export interface ErrorLog {
+	id: string;
+	created_at: string;
+	workflow: string | null;
+	message: string | null;
+	step: string | null;
+	ticket_id: string | null;
+	call_id: string | null;
+}
+
 export interface Ticket {
 	id: string;
 	ticket_id: string;

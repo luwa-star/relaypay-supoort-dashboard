@@ -8,6 +8,7 @@ import {
 	Phone,
 	Ticket,
 	BarChart3,
+	AlertCircle,
 	BookOpen,
 	LogOut,
 } from "lucide-react";
@@ -33,6 +34,12 @@ const navItems = [
 		href: "/dashboard/performance",
 		label: "Performance",
 		icon: BarChart3,
+		exact: false,
+	},
+	{
+		href: "/dashboard/errors",
+		label: "Error Logs",
+		icon: AlertCircle,
 		exact: false,
 	},
 ];
